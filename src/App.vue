@@ -65,7 +65,9 @@ export default {
   watch: {
     msgList() {
       console.log(this.msgList[this.msgList.length - 1]);
-      this.pushChat();
+      setTimeout(() => {
+        this.pushChat();
+      }, 0);
     }
     //  that.pushChat();
   },
