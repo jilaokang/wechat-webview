@@ -1,26 +1,24 @@
 <template>
   <div id="app">
     <div class="main">
-      <div class="chatArea" style="background: #efefef;height: 85vh;">
+      <div class="chatArea" style="background: #efefef;height: 90vh;">
+        <div>
         <div v-for="(item,index) of msgList" :key="index">
-          {{item.content.content}}
           <my-msg v-if="item.content.openid == init.data.openid" :value="item.content"></my-msg>
           <other-msg v-else :value="item.content"></other-msg>
-          {{item.content.openid}}
+        </div>
         </div>
       </div>
-      <div class="navArea">
-        <div class="row center_middle">
+      <div class="navArea row center_middle">
           <div class="item-2">
             <button>button</button>
           </div>
           <div class="item-7">
-            <textarea class="weui-textarea" v-model="postmssage.data.mine.content"></textarea>
+            <textarea id="chatTextArea" maxlength="256" @scroll="setHeight(this)" v-model="postmssage.data.mine.content"></textarea>
           </div>
           <div class="item-3">
             <button class="weui-btn weui-btn_mini weui-btn_primary" @click="postMsg">发送</button>
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -64,6 +62,13 @@ export default {
       }
     };
   },
+  watch: {
+    msgList() {
+      console.log(this.msgList[this.msgList.length - 1]);
+      this.pushChat();
+    }
+    //  that.pushChat();
+  },
   methods: {
     postMsg() {
       let POSTDATA = JSON.stringify(this.postmssage);
@@ -71,6 +76,7 @@ export default {
       if (this.postmssage.data.mine.content != null) {
         this.postmssage.data.mine.content = null;
         websocket.send(POSTDATA);
+        chatTextArea.style.height = "30px";
       }
     },
     getHash(value) {
@@ -81,14 +87,30 @@ export default {
       for (let i of hashArr) {
         if (value === i[0]) return i[1];
       }
+    },
+    setHeight(obj) {
+      var textarea = document.getElementById("chatTextArea");
+      console.log(textarea);
+      if (textarea.scrollHeight < 168) {
+        textarea.style.height = textarea.scrollHeight + "px";
+      }
+    },
+    pushChat() {
+      document.querySelector(".chatArea").scrollTop = document.querySelector(
+        ".chatArea"
+      ).scrollHeight;
     }
   },
   created() {
     let that = this;
+    // this.init.data.user_id = this.getHash("id");
+    // this.init.data.openid = this.getHash("openid");
+    // this.init.data.wangge_id = this.getHash("wgbm");
+    // this.init.data.name = this.getHash("name");
+    // this.init.data.headimgurl = this.getHash("avatar");
+    // this.init.data.user_gn_type = this.getHash("user_gn_type");
+    console.log(name);
 
-    let a = this.getHash("user");
-
-    console.log(a);
     let INITDATA = JSON.stringify(this.init);
     //打开连接websocket
     websocket.onopen = function() {
@@ -123,12 +145,30 @@ export default {
 }
 
 .chatArea {
-  padding: 15px;
   overflow: scroll;
+  -div {
+    padding: 15px;
+  }
+}
+
+.navArea {
+  height: 10vh;
+  padding: 3px 0;
 }
 
 textarea {
   width: 100%;
-  border: 1px solid red;
+  border: none;
+  border-bottom: 1px solid #efefef;
+  padding: 3px 4px;
+  border-radius: 3px;
+  overflow-y: scroll;
+  z-index: 999;
+  font-size: 16px;
+}
+.navArea .item-2,
+.navArea .item-3,
+.navArea .item-7 {
+  text-align: center;
 }
 </style>
