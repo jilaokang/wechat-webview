@@ -32,6 +32,7 @@
 import MyMsg from "./componet/myMsg";
 import OtherMsg from "./componet/otherMsg";
 var wsUrl = "wss://wll.tenqent.com:4431"; //必须以ws开头
+import "./assets/jquery.js";
 
 var websocket = new WebSocket(wsUrl); //new出一个 websocket 实例
 export default {
@@ -106,8 +107,8 @@ export default {
       ).scrollHeight;
     },
     getHistory() {
-      // let that = this;
-      // that.page++;
+      let that = this;
+      that.page++;
       //   console.log("aaa");
       //   axios({
       //     url: "https://wechat.tenqent.com/api/wxapp/chat_room/getHistoryLog",
@@ -129,6 +130,26 @@ export default {
       //     console.log(that.msgList);
       //   });
       // }
+
+      $.post(
+        "https://wechat.tenqent.com/api/wxapp/chat_room/getHistoryLog",
+        {
+          openid: that.init.data.openid,
+          wgbm: that.init.data.wangge_id,
+          page: that.page
+        },
+        function(chatArr) {
+          console.log(chatArr.data.data.data);
+          let CHATARR = chatArr.data.data.data;
+          CHATARR = CHATARR.reverse();
+          CHATARR.forEach((value, index) => {
+            // that.msgList[index] = value;
+            // this.$set(that.msgList, index, value);
+            that.msgList.unshift(value);
+          });
+          console.log(that.msgList);
+        }
+      );
     }
   },
   created() {
