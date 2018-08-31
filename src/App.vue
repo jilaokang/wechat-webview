@@ -9,7 +9,8 @@
         </div>
         </div>
       </div>
-      <div class="navArea row center_middle">
+      <div class="navArea">
+        <div class="row center_middle">
           <div class="item-2">
             <button>button</button>
           </div>
@@ -20,6 +21,7 @@
             <button class="weui-btn weui-btn_mini weui-btn_primary" @click="postMsg">发送</button>
           </div>
       </div>
+              </div>
     </div>
   </div>
 </template>
@@ -105,12 +107,13 @@ export default {
   },
   created() {
     let that = this;
-    // this.init.data.user_id = this.getHash("id");
-    // this.init.data.openid = this.getHash("openid");
-    // this.init.data.wangge_id = this.getHash("wgbm");
-    // this.init.data.name = this.getHash("name");
-    // this.init.data.headimgurl = this.getHash("avatar");
-    // this.init.data.user_gn_type = this.getHash("user_gn_type");
+    this.init.data.user_id = this.getHash("id");
+    this.init.data.openid = this.getHash("openid");
+    this.init.data.wangge_id = this.getHash("wgbm");
+    this.init.data.name = this.getHash("name");
+    this.init.data.headimgurl = this.getHash("avatar");
+    this.init.data.user_gn_type = this.getHash("user_gn_type");
+    this.postmssage.data.to.id = this.getHash("wgbm");
     console.log(name);
 
     let INITDATA = JSON.stringify(this.init);
@@ -155,6 +158,7 @@ export default {
 
 .navArea {
   height: 10vh;
+  display: absolute;
   padding: 3px 0;
 }
 
