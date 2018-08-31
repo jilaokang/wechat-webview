@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <div class="main">
-      <div class="chatArea" style="background: #efefef;height: 90vh;">
+      <div class="chatArea" style="background: #efefef;height:90vh"  :style="keyBordheight?'height:45vh !important':'height:90vh'" >
         <div>
+          {{init.data.user_id}}{{init.data.openid}}{{init.data.headimgurl}}
+          <div @click="getHistory" class="getmore row center_middle" >获取更多</div>
         <div v-for="(item,index) of msgList" :key="index">
           <my-msg v-if="item.content.openid == init.data.openid" :value="item.content"></my-msg>
           <other-msg v-else :value="item.content"></other-msg>
@@ -12,10 +14,10 @@
       <div class="navArea">
         <div class="row center_middle">
           <div class="item-2">
-            <button>button</button>
+            <button>语音</button>
           </div>
           <div class="item-7">
-            <textarea id="chatTextArea" maxlength="256" @scroll="setHeight(this)" v-model="postmssage.data.mine.content"></textarea>
+            <textarea id="chatTextArea" maxlength="256" @focus="keyBordheight = true" @mouseout="keyBordheight = false" @scroll="setHeight(this)" v-model="postmssage.data.mine.content"></textarea>
           </div>
           <div class="item-3">
             <button class="weui-btn weui-btn_mini weui-btn_primary" @click="postMsg">发送</button>
@@ -38,6 +40,8 @@ export default {
   data() {
     return {
       msgList: [],
+      page: 0,
+      keyBordheight: false,
       postmssage: {
         type: "chatMessage",
         data: {
@@ -46,32 +50,29 @@ export default {
           },
           to: {
             type: "other",
-            id: 420102001001001
+            id: null
           }
         }
       },
       init: {
         type: "init",
         data: {
-          user_id: 3621,
-          openid: "oaorM4hjaKt0_zwUOTiS-juvbLNU",
-          wangge_id: 420102001001001,
-          name: "文虎",
-          headimgurl:
-            "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJYzCiaicvx24kOTaUlWvOt10kXpFJojlktyzmZf6prr6fzfjfgCDjepcMyaBVRqv1CJibD4UkPrxQicA/132",
-          user_gn_type: 1
+          user_id: null,
+          openid: null,
+          wangge_id: null,
+          name: null,
+          headimgurl: null,
+          user_gn_type: null
         }
       }
     };
   },
   watch: {
     msgList() {
-      console.log(this.msgList[this.msgList.length - 1]);
       setTimeout(() => {
-        this.pushChat();
+        this.pushChat("bottom");
       }, 0);
     }
-    //  that.pushChat();
   },
   methods: {
     postMsg() {
@@ -81,6 +82,7 @@ export default {
         this.postmssage.data.mine.content = null;
         websocket.send(POSTDATA);
         chatTextArea.style.height = "30px";
+        this.getHash("bottom");
       }
     },
     getHash(value) {
@@ -94,7 +96,6 @@ export default {
     },
     setHeight(obj) {
       var textarea = document.getElementById("chatTextArea");
-      console.log(textarea);
       if (textarea.scrollHeight < 168) {
         textarea.style.height = textarea.scrollHeight + "px";
       }
@@ -103,17 +104,43 @@ export default {
       document.querySelector(".chatArea").scrollTop = document.querySelector(
         ".chatArea"
       ).scrollHeight;
+    },
+    getHistory() {
+      // let that = this;
+      // that.page++;
+      //   console.log("aaa");
+      //   axios({
+      //     url: "https://wechat.tenqent.com/api/wxapp/chat_room/getHistoryLog",
+      //     data: {
+      //       openid: that.init.data.openid,
+      //       wgbm: that.init.data.wangge_id,
+      //       page: that.page
+      //     },
+      //     method: "POST"
+      //   }).then(chatArr => {
+      //     console.log(chatArr.data.data.data);
+      //     let CHATARR = chatArr.data.data.data;
+      //     CHATARR = CHATARR.reverse();
+      //     CHATARR.forEach((value, index) => {
+      //       // that.msgList[index] = value;
+      //       // this.$set(that.msgList, index, value);
+      //       that.msgList.unshift(value);
+      //     });
+      //     console.log(that.msgList);
+      //   });
+      // }
     }
   },
   created() {
     let that = this;
-    this.init.data.user_id = this.getHash("id");
-    this.init.data.openid = this.getHash("openid");
-    this.init.data.wangge_id = this.getHash("wgbm");
-    this.init.data.name = this.getHash("name");
-    this.init.data.headimgurl = this.getHash("avatar");
-    this.init.data.user_gn_type = this.getHash("user_gn_type");
-    this.postmssage.data.to.id = this.getHash("wgbm");
+    that.getHistory();
+    that.init.data.user_id = this.getHash("id");
+    that.init.data.openid = this.getHash("openid");
+    that.init.data.wangge_id = this.getHash("wgbm");
+    that.init.data.name = this.getHash("name");
+    that.init.data.headimgurl = this.getHash("avatar");
+    that.init.data.user_gn_type = this.getHash("user_gn_type");
+    that.postmssage.data.to.id = this.getHash("wgbm");
     console.log(name);
 
     let INITDATA = JSON.stringify(this.init);
@@ -126,6 +153,7 @@ export default {
         let RESDATA = JSON.parse(evt.data);
         if (RESDATA.type != "ping") {
           that.msgList = that.msgList.concat(RESDATA);
+          this.pushChat("bottom");
           console.log(RESDATA.type);
         }
       };
@@ -135,6 +163,9 @@ export default {
         console.log("error", evt);
       };
     };
+  },
+  destroyed() {
+    socket.close();
   }
 };
 </script>
@@ -176,5 +207,10 @@ textarea {
 .navArea .item-3,
 .navArea .item-7 {
   text-align: center;
+}
+.getmore {
+  font-size: 12px;
+  color: #999999;
+  line-height: 30px;
 }
 </style>
