@@ -2,7 +2,7 @@
   <div class="MSG">
     <div class="myMsg">
           <div class="icon-qipao-copy iconfont"></div>
-      <div class="myMsg__content">{{value.content}}</div>
+      <div class="myMsg__content" v-html="value.content"></div>
     </div>
     <div class="userInFo">
       <div class="userInFo__avator">
@@ -39,6 +39,9 @@ export default {
     word-break: break-word;
     background: #2e94b9;
     color: #fff;
+    img {
+      width: 50px !important;
+    }
   }
   .iconfont {
     font-size: 30px;
