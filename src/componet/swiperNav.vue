@@ -80,133 +80,147 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      postMsg: {}
-    },
-    data() {
-      return {
-        image: "",
-        camera: '',
-        file: '',
-        audio: '',
-      }
-    },
-    mounted() {
-      this.getValue('#postimg', 'image')
-      this.getValue('#postcamera', 'camera')
-      this.getValue('#postfile', 'file')
-      this.getValue('#postaudio', 'audio')
-    },
-    methods: {
-      getValue(dom, type) {
-        let that = this;
-        let DOM = document.querySelector(dom);
-        let TYPE;
-        DOM.addEventListener('change', function () {
-          let file = this.files[0];
-          let FileName = file.name;
+export default {
+  props: {
+    postMsg: {}
+  },
+  data() {
+    return {
+      image: "",
+      camera: "",
+      file: "",
+      audio: ""
+    };
+  },
+  mounted() {
+    this.getValue("#postimg", "image");
+    this.getValue("#postcamera", "camera");
+    this.getValue("#postfile", "file");
+    this.getValue("#postaudio", "audio");
+  },
+  methods: {
+    getValue(dom, type) {
+      // wx.chooseImage({
+      //   count: 1, // 默认9
+      //   sizeType: ["compressed"], // 可以指定是原图还是压缩图，默认二者都有
+      //   sourceType: ["album", "camera"], // 可以指定来源是相册还是相机，默认二者都有
+      //   success: function(res) {
+      //     // var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+      //     wx.uploadImage({
+      //       localId: localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
+      //       isShowProgressTips: 1, // 默认为1，显示进度提示
+      //       success: function(res) {
+      //         // var serverId = res.serverId; // 返回图片的服务器端ID
+      //         // that.sendMedia(serverId);
+      //         console.log(res);
+      //       }
+      //     });
+      //   }
+      // });
 
-          if (window.FileReader) {
-            var reader = new FileReader();
-            reader.readAsDataURL(file);
-            //监听文件读取结束后事件
-            reader.onloadend = function (e) {
-              // 获取到的在线链接
-              let value = that[type] = e.target.result
-              console.log(e.target.result)
+      let that = this;
+      let DOM = document.querySelector(dom);
+      let TYPE;
+      DOM.addEventListener("change", function() {
+        let file = this.files[0];
+        let FileName = file.name;
 
-              switch (type) {
-                case 'image':
-                  TYPE = 1
-                  break;
-                case "file":
-                  TYPE = 2
-                  break;
-                case 'video':
-                  TYPE = 3
-                  break;
-              }
-              that.getUrl(FileName, value, TYPE).then(VALUE => {
-                that.$emit('postMsg', VALUE, type)
-              })
-            };
-          }
-        })
-      },
+        if (window.FileReader) {
+          var reader = new FileReader();
+          reader.readAsDataURL(file);
+          //监听文件读取结束后事件
+          reader.onloadend = function(e) {
+            // 获取到的在线链接
+            let value = (that[type] = e.target.result);
+            console.log(e.target.result);
 
-      getUrl(name, value, type) {
-        return axios({
-            url: "https://wechat.tenqent.com/api/wxapp/chat/wen_upload",
-            data: {
-              base64: value,
-              // 1图片 2文件 3mp3
-              type: type,
-              name: name
-            },
-            method: "post"
-          })
-          .then(res => {
-            return res.data.data
-          })
-
-      },
-      toPushThing() {
-        wx.miniProgram.navigateTo({
-          url: "/pages/pushdeal/index"
-        })
-      }
+            switch (type) {
+              case "image":
+                TYPE = 1;
+                break;
+              case "file":
+                TYPE = 2;
+                break;
+              case "video":
+                TYPE = 3;
+                break;
+            }
+            that.getUrl(FileName, value, TYPE).then(VALUE => {
+              that.$emit("postMsg", VALUE, type);
+            });
+          };
+        }
+      });
     },
 
-    created() {}
-  };
+    getUrl(name, value, type) {
+      return axios({
+        url: "https://wechat.tenqent.com/api/wxapp/chat/wen_upload",
+        data: {
+          base64: value,
+          // 1图片 2文件 3mp3
+          type: type,
+          name: name
+        },
+        method: "post"
+      }).then(res => {
+        return res.data.data;
+      });
+    },
+    toPushThing() {
+      wx.miniProgram.navigateTo({
+        url: "/pages/pushdeal/index"
+      });
+    }
+  },
 
+  created() {}
+};
 </script>
 
 <style lang="scss" scoped>
-  .ChatSwiper {
-    padding: 10px;
-    padding-bottom: 10px;
-    background: rgba(0, 0, 0, 0.05);
+.ChatSwiper {
+  padding: 10px;
+  padding-bottom: 10px;
+  background: rgba(0, 0, 0, 0.05);
 
-    .item-3 section {
-      color: #999999;
+  .item-3 section {
+    color: #999999;
 
-      .iconBlock {
-        background: #ffffff;
-        padding: 6px;
-        margin: 5px;
-        border: 1px solid #efefef;
-        border-radius: 10px;
+    .iconBlock {
+      background: #ffffff;
+      padding: 6px;
+      margin: 5px;
+      border: 1px solid #efefef;
+      border-radius: 10px;
 
-        div {
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-      }
-
-      .iconfont {
-        font-size: 32px;
-      }
-
-      .iconfontNav {
-        font-size: 12px;
+      div {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
-  }
 
-  .inputgroup {
-    width: 18%;
-    margin: -78px 0 0 -32px;
-    height: 80px;
-    position: fixed;
-    opacity: 0;
-    display: inline;
-    border: 1px solid red;
-    background: red;
-    color: red
-  }
+    .iconfont {
+      font-size: 32px;
+    }
 
+    .iconfontNav {
+      font-size: 12px;
+    }
+  }
+}
+
+.inputgroup {
+  width: 18%;
+  margin: -78px 0 0 -32px;
+  height: 80px;
+  position: fixed;
+  opacity: 0;
+  display: inline;
+  border: 1px solid red;
+  background: red;
+  color: red;
+}
 </style>

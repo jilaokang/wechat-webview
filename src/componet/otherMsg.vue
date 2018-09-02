@@ -9,7 +9,7 @@
     </div>
     <div class="otherMsg">
       <div class="icon-qipao iconfont"></div>
-      <div class="otherMsg__content">{{value.content}}</div>
+      <div class="otherMsg__content" v-html="value.content"></div>
     </div>
   </div>
   </div>
