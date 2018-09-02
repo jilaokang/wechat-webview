@@ -60,7 +60,7 @@
             </div>
             <div class="item-3">
               <section>
-                <div class="iconBlock">
+                <div class="iconBlock" @click="toJonin">
                   <div class="iconfont icon-huabanfuben"></div>
                   <div class="iconfontNav">我要参与</div>
                 </div>
@@ -76,7 +76,7 @@
             </div>
             <div class="item-3">
               <section>
-                <div class="iconBlock">
+                <div class="iconBlock" @click="toClear">
                   <div class="iconfont icon-dajimubiao"></div>
                   <div class="iconfontNav">扫黑除恶</div>
                 </div>
@@ -164,6 +164,16 @@ export default {
       wx.miniProgram.navigateTo({
         url: "/pages/pushdeal/index"
       });
+    },
+    toJonin() {
+      wx.miniProgram.navigateTo({
+        url: "/pages/wish/index"
+      });
+    },
+    toClear() {
+      wx.miniProgram.navigateTo({
+        url: "/pages/underworld/index"
+      });
     }
   },
 
@@ -174,7 +184,7 @@ export default {
 <style lang="scss" scoped>
 .ChatSwiper {
   padding: 10px;
-  height: 200px;
+  height: 230px;
   padding-bottom: 10px;
   background: rgba(0, 0, 0, 0.05);
 

@@ -95,6 +95,7 @@ export default {
       }
     };
   },
+
   methods: {
     screenSwitch(value) {
       let SCREEN = this.screen;

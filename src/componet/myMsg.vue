@@ -1,4 +1,10 @@
 <template>
+<div>
+    <div class="timer">
+      <div>
+        {{value.chat_time}}
+      </div>
+      </div>
   <div class="MSG">
     <div class="myMsg">
           <div class="icon-qipao-copy iconfont"></div>
@@ -11,6 +17,7 @@
       <div class="userInFo__content">{{value.name}}</div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -73,6 +80,19 @@ export default {
     text-align: center;
     font-size: 12px;
     color: #999999;
+  }
+}
+.timer {
+  text-align: center;
+  margin: 24px auto 16px auto;
+  width: 40%;
+  div {
+    background: #dadada;
+    color: #ffffff;
+    line-height: 2;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 10px;
   }
 }
 </style>
