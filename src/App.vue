@@ -6,7 +6,7 @@
         <div class="row">
         </div>
         <div>
-          {{screen}}
+          <!-- {{screen}} -->
           <div @click="getHistory" class="getmore row center_middle">获取更多</div>
           <div v-for="(item,index) of msgList" :key="index">
             <my-msg v-if="item.content.openid == init.data.openid" :value="item.content"></my-msg>
@@ -34,9 +34,9 @@
             </div>
           </div>
         </div>
-        <FooterMenu v-if="footernav" v-on:postMsg="postMsg">
-        </FooterMenu>
       </div>
+           <FooterMenu v-if="footernav" v-on:postMsg="postMsg">
+        </FooterMenu>
     </div>
   </div>
 </template>
@@ -203,6 +203,8 @@ export default {
     that.init.data.headimgurl = this.getHash("avatar");
     that.init.data.user_gn_type = this.getHash("user_gn_type");
     that.postmssage.data.to.id = this.getHash("wgbm");
+    document.title = this.getHash("title");
+
     let INITDATA = JSON.stringify(this.init);
     //打开连接websocket
     this.screenSwitch();

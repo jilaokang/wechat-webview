@@ -9,7 +9,9 @@
                 <div class="iconBlock">
                   <div class="iconfont icon-zhaopian"></div>
                   <div class="iconfontNav">照片</div>
+                  <div>
                   <input type="file" id="postimg" class="inputgroup" accept="image/*" />
+                  </div>
                 </div>
               </section>
             </div>
@@ -18,7 +20,11 @@
                 <div class="iconBlock">
                   <div class="iconfont icon-zhaopian1"></div>
                   <div class="iconfontNav">拍摄</div>
+                  <div>
+                    
+                  
                   <input type="file" id="postcamera" class="inputgroup" accept="image/*" capture="camera" />
+               </div>
                 </div>
               </section>
             </div>
@@ -27,7 +33,9 @@
                 <div class="iconBlock">
                   <div class="iconfont icon-yuyin1"></div>
                   <div class="iconfontNav">语音输入</div>
-                  <input type="file" id="postaudio" class="inputgroup" accept="*" />
+                  <div>
+                     <input type="file" id="postaudio" class="inputgroup" accept="*" />
+                  </div>
                 </div>
               </section>
             </div>
@@ -36,7 +44,9 @@
                 <div class="iconBlock">
                   <div class="iconfont icon-wenjian"></div>
                   <div class="iconfontNav">文件</div>
+                  <div>
                   <input type="file" id="postfile" class="inputgroup" accept="*" />
+                  </div>
                 </div>
               </section>
             </div>
@@ -100,24 +110,7 @@ export default {
   },
   methods: {
     getValue(dom, type) {
-      // wx.chooseImage({
-      //   count: 1, // 默认9
-      //   sizeType: ["compressed"], // 可以指定是原图还是压缩图，默认二者都有
-      //   sourceType: ["album", "camera"], // 可以指定来源是相册还是相机，默认二者都有
-      //   success: function(res) {
-      //     // var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-      //     wx.uploadImage({
-      //       localId: localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
-      //       isShowProgressTips: 1, // 默认为1，显示进度提示
-      //       success: function(res) {
-      //         // var serverId = res.serverId; // 返回图片的服务器端ID
-      //         // that.sendMedia(serverId);
-      //         console.log(res);
-      //       }
-      //     });
-      //   }
-      // });
-
+      console.log("ddd");
       let that = this;
       let DOM = document.querySelector(dom);
       let TYPE;
@@ -181,6 +174,7 @@ export default {
 <style lang="scss" scoped>
 .ChatSwiper {
   padding: 10px;
+  height: 200px;
   padding-bottom: 10px;
   background: rgba(0, 0, 0, 0.05);
 
@@ -213,10 +207,11 @@ export default {
 }
 
 .inputgroup {
-  width: 18%;
-  margin: -78px 0 0 -32px;
+  width: 100%;
+  // margin: -78px 0 0 -32px;
+  margin-top: -80px;
+  // position: absolute;
   height: 80px;
-  position: fixed;
   opacity: 0;
   display: inline;
   border: 1px solid red;
