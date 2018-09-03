@@ -107,9 +107,9 @@ export default {
       } else if (639 < SCREEN && SCREEN < 701) {
         this.chatHeight = this.keyBordheight ? "48vh" : "78vh";
       } else if (701 < SCREEN && SCREEN < 788) {
-        this.chatHeight = this.keyBordheight ? "42vh" : "82vh";
+        this.chatHeight = this.keyBordheight ? "46vh" : "82vh";
       } else if (788 < SCREEN) {
-        this.chatHeight = this.keyBordheight ? "38vh" : "85vh";
+        this.chatHeight = this.keyBordheight ? "46vh" : "85vh";
       }
       this.pushChat("#app");
       // this.getChatHeight();
@@ -205,6 +205,7 @@ export default {
     that.init.data.user_gn_type = this.getHash("user_gn_type");
     that.postmssage.data.to.id = this.getHash("wgbm");
     document.title = this.getHash("title");
+    // document.title = "武汉微邻里";
 
     let INITDATA = JSON.stringify(this.init);
     //打开连接websocket

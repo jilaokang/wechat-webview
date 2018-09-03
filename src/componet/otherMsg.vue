@@ -21,78 +21,76 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      value: {}
-    },
-    created() {
-      console.log(this.value);
-    }
-  };
-
+export default {
+  props: {
+    value: {}
+  },
+  created() {
+    console.log(this.value);
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  @import "../scss/iconfont.scss";
+@import "../scss/iconfont.scss";
 
-  .MSG {
-    display: flex;
-    margin-top: 12px;
-    margin-left: 9px;
-    justify-items: center;
+.MSG {
+  display: flex;
+  margin-top: 12px;
+  margin-left: 9px;
+  justify-items: center;
+}
+
+.otherMsg {
+  width: 60vw;
+
+  .otherMsg__content {
+    padding: 9px 12px;
+    border-radius: 4px;
+    word-break: break-word;
+    background: #fff;
   }
 
-  .otherMsg {
-    width: 60vw;
+  .iconfont {
+    font-size: 30px;
+    float: left;
+    margin-top: 7px;
+    margin-left: -17px;
+    color: white;
+  }
+}
 
-    .otherMsg__content {
-      padding: 9px 12px;
-      border-radius: 4px;
-      word-break: break-word;
-      background: #fff;
-    }
+.userInFo {
+  width: 75px;
 
-    .iconfont {
-      font-size: 30px;
-      float: left;
-      margin-top: 7px;
-      margin-left: -17px;
-      color: white;
-    }
+  .userInFo__avator,
+  img {
+    margin: 0 auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
   }
 
-  .userInFo {
-    width: 75px;
-
-    .userInFo__avator,
-    img {
-      margin: 0 auto;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
-
-    .userInFo__content {
-      margin-top: 6px;
-      text-align: center;
-      font-size: 12px;
-      color: #999999;
-    }
-  }
-
-  .timer {
+  .userInFo__content {
+    margin-top: 6px;
     text-align: center;
-    margin: 24px auto 16px auto;
-    width: 40%;
-
-    div {
-      background: #dadada;
-      color: #ffffff;
-      line-height: 2;
-      text-align: center;
-      border-radius: 8px;
-      font-size: 10px;
-    }
+    font-size: 12px;
+    color: #999999;
   }
+}
 
+.timer {
+  text-align: center;
+  margin: 24px auto 16px auto;
+  width: 40%;
+
+  div {
+    background: #dadada;
+    color: #ffffff;
+    line-height: 2.5;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 10px;
+  }
+}
 </style>

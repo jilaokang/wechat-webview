@@ -21,8 +21,6 @@
                   <div class="iconfont icon-zhaopian1"></div>
                   <div class="iconfontNav">拍摄</div>
                   <div>
-                    
-                  
                   <input type="file" id="postcamera" class="inputgroup" accept="image/*" capture="camera" />
                </div>
                 </div>
@@ -126,7 +124,6 @@ export default {
             // 获取到的在线链接
             let value = (that[type] = e.target.result);
             console.log(e.target.result);
-
             switch (type) {
               case "image":
                 TYPE = 1;

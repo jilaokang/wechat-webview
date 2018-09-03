@@ -89,7 +89,7 @@ export default {
   div {
     background: #dadada;
     color: #ffffff;
-    line-height: 2;
+    line-height: 2.5;
     text-align: center;
     border-radius: 8px;
     font-size: 10px;
