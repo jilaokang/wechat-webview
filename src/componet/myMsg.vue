@@ -4,7 +4,7 @@
       <div>
         {{value.chat_time}}
       </div>
-      </div>
+    </div>
   <div class="MSG">
     <div class="myMsg">
           <div class="icon-qipao-copy iconfont"></div>
@@ -44,8 +44,8 @@ export default {
     padding: 9px 12px;
     border-radius: 4px;
     word-break: break-word;
-    background: #2e94b9;
-    color: #fff;
+    background: #a1e85a;
+    color: #000000;
     img {
       width: 50px !important;
     }
@@ -55,7 +55,7 @@ export default {
     z-index: 999;
     float: right;
     margin-right: -16px;
-    color: #2e94b9;
+    color: #a1e85a;
   }
 }
 
@@ -79,17 +79,17 @@ export default {
     margin-top: 6px;
     text-align: center;
     font-size: 12px;
-    color: #999999;
+    color: #7c8187;
   }
 }
 .timer {
   text-align: center;
   margin: 24px auto 16px auto;
-  width: 40%;
+  width: 32%;
   div {
-    background: #dadada;
+    background: #d5d5d5;
     color: #ffffff;
-    line-height: 2.5;
+    line-height: 2.2;
     text-align: center;
     border-radius: 8px;
     font-size: 10px;

@@ -108,9 +108,9 @@ export default {
       } else if (639 < SCREEN && SCREEN < 701) {
         this.chatHeight = this.keyBordheight ? "92vh" : "92vh";
       } else if (701 < SCREEN && SCREEN < 788) {
-        this.chatHeight = this.keyBordheight ? "52vh" : "92vh";
+        this.chatHeight = this.keyBordheight ? "92vh" : "92vh";
       } else if (788 < SCREEN) {
-        this.chatHeight = this.keyBordheight ? "52vh" : "92vh";
+        this.chatHeight = this.keyBordheight ? "92vh" : "92vh";
       }
       this.pushChat("#app");
       // this.getChatHeight();
@@ -171,27 +171,12 @@ export default {
         let CHATARR = chatArr.data.data.data;
         CHATARR = CHATARR.reverse();
         CHATARR.forEach((value, index) => {
-          // that.msgList[index] = value;
-          // this.$set(that.msgList, index, value);
           that.msgList.unshift(value);
         });
         console.log(that.msgList);
       });
     },
-    // 获取屏幕尺寸
-    // getChatHeight() {
-    //   let that = this;
-    //   setTimeout(() => {
-    //     this.chatHeight =
-    //       (window.screen.availHeight -
-    //         document.querySelector(".navArea").offsetHeight) /
-    //         window.screen.height *
-    //         100 -
-    //       13 +
-    //       "vh";
-    //   }, 0);
-    // },
-    toDetail(){
+    toDetail() {
       wx.miniProgram.navigateTo({
         url: "/pages/chat/roominfo/index"
       });
@@ -205,13 +190,12 @@ export default {
     let that = this;
     that.init.data.user_id = this.getHash("id");
     that.init.data.openid = this.getHash("openid");
-    that.init.data.wangge_id = this.getHash("wgbm");
+    that.init.data.wangge_id = this.getHash("toid");
     that.init.data.name = this.getHash("name");
     that.init.data.headimgurl = this.getHash("avatar");
     that.init.data.user_gn_type = this.getHash("user_gn_type");
-    that.postmssage.data.to.id = this.getHash("wgbm");
+    that.postmssage.data.to.id = this.getHash("toid");
     document.title = this.getHash("title");
-    document.title = "武汉微邻里";
 
     let INITDATA = JSON.stringify(this.init);
     //打开连接websocket
@@ -304,17 +288,17 @@ textarea {
 .navArea .item-7 {
   text-align: center;
 }
-#header{
+#header {
   width: 100%;
-  box-shadow: 1px 1px 30px #aaaaaa;
+  box-shadow: 1px 1px 30px #e0e0e0;
   height: 48px;
-  background:rgba(255,255,255,0.99);
+  background: rgba(255, 255, 255, 0.99);
   position: fixed;
-  top:0;
-  .iconfont{
-      padding:0 32px;
+  top: 0;
+  .iconfont {
+    padding: 0 32px;
     font-size: 24px;
-    color:#aaaaaa;
+    color: #aaaaaa;
   }
 }
 .getmore {

@@ -82,12 +82,11 @@ export default {
 .timer {
   text-align: center;
   margin: 24px auto 16px auto;
-  width: 40%;
-
+  width: 32%;
   div {
-    background: #dadada;
+    background: #d5d5d5;
     color: #ffffff;
-    line-height: 2.5;
+    line-height: 2.2;
     text-align: center;
     border-radius: 8px;
     font-size: 10px;

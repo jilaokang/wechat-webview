@@ -183,10 +183,10 @@ export default {
   padding: 10px;
   height: 230px;
   padding-bottom: 10px;
-  background: rgba(0, 0, 0, 0.05);
+  background: #f5f5f5;
 
   .item-3 section {
-    color: #999999;
+    color: #7c8187;
 
     .iconBlock {
       background: #ffffff;
