@@ -1,8 +1,27 @@
 <template>
   <div id="app">
     <div class="main">
-      <div id="header" class="right_middle">
-        <span class="iconfont icon-qunzhu" @click="toDetail"></span>
+      <div id="header" class="left_middle row container">
+        <div class="col-2">
+          <div class="left_middle change" style="padding-left:10px">
+            <div class="iconfont icon-fanhui1"></div>
+            <div class="change_content">
+              选择社区
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="swiper-container">
+            <div class="swiper-content">
+              <div class="swiper-slide">武汉微邻里V1.0版本测试上线</div>
+              <div class="swiper-slide">欢迎各位领导测试反馈^_^</div>
+              <div class="swiper-slide">感谢您的宝贵意见</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-2 right">
+          <span class="iconfont icon-qunzhu" style="padding-right:10px" @click="toDetail"></span>
+        </div>
       </div>
       <!-- :style="keyBordheight?'height:48vh !important':'height:90vh'" -->
       <div class="chatArea" :style="'background: #efefef;height:'+chatHeight">
@@ -17,27 +36,25 @@
       </div>
       <div class="navArea">
         <div class="row" style="height: 46px;">
-          <!-- <div class="item-2">
-            <button>语音</button>
-          </div> -->
-          <div class="col-7">
+          <div class="iconfont icon-yuyin" @click="watting" style="padding-left: 3px;"></div>
+          <div class="col-6">
             <div class="textareaDiv">
-              <textarea rows="1" id="chatTextArea" maxlength="256" contenteditable="true" 
-               v-model="postmssage.data.mine.content"  @focus="screenSwitch(true)" @mouseout="screenSwitch(false)"></textarea>
+              <textarea rows="1" id="chatTextArea" maxlength="256" contenteditable="true" v-model="postmssage.data.mine.content"
+                @focus="screenSwitch(true)" @mouseout="screenSwitch(false)"></textarea>
             </div>
           </div>
           <div class="col-3">
-            <div class="row center_middle">
+            <div class="row right_middle">
               <div class="iconfont icon-jia1" @click="showFooterNav"></div>
               <div>
-                <button class="weui-btn weui-btn_mini weui-btn_primary center_middle" @click="postMsg(postmssage.data.mine.content)">发送</button>
+                <button class="weui-btn weui-btn_mini weui-btn_primary right_middle" @click="postMsg(postmssage.data.mine.content)">发送</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-           <FooterMenu v-if="footernav" v-on:postMsg="postMsg">
-        </FooterMenu>
+      <FooterMenu v-if="footernav" v-on:postMsg="postMsg">
+      </FooterMenu>
     </div>
   </div>
 </template>
@@ -113,14 +130,6 @@ export default {
         this.chatHeight = this.keyBordheight ? "92vh" : "92vh";
       }
       this.pushChat("#app");
-      // this.getChatHeight();
-      // console.log(parseInt(this.chatHeight));
-      // setTimeout(() => {
-      //   if (this.keyBordheight && parseInt(this.chatHeight) > 65) {
-      //     this.chatHeight = "42vh";
-      //   }
-      // }, 300);
-      // console.log(this.chatHeight);
     },
     postMsg(content, type) {
       this.postmssage.data.mine.content = content;
@@ -139,7 +148,7 @@ export default {
     },
     // 从url中获取参数封装的方法
     getHash(value) {
-      const HASH = window.location.hash.split("#")[1];
+      const HASH = decodeURI(window.location.hash).split("#")[1];
       let hashArr = HASH.split("&").map((value, index) => {
         return value.split("=");
       });
@@ -173,7 +182,9 @@ export default {
         CHATARR.forEach((value, index) => {
           that.msgList.unshift(value);
         });
-        console.log(that.msgList);
+        if (that.page == 1) {
+          that.pushChat(".chatArea");
+        }
       });
     },
     toDetail() {
@@ -184,18 +195,21 @@ export default {
     showFooterNav() {
       this.footernav = !this.footernav;
       this.pushChat("#app");
+    },
+    watting() {
+      alert("正在开发中");
     }
   },
   mounted() {
     let that = this;
-    that.init.data.user_id = this.getHash("id");
-    that.init.data.openid = this.getHash("openid");
-    that.init.data.wangge_id = this.getHash("toid");
-    that.init.data.name = this.getHash("name");
-    that.init.data.headimgurl = this.getHash("avatar");
-    that.init.data.user_gn_type = this.getHash("user_gn_type");
-    that.postmssage.data.to.id = this.getHash("toid");
-    document.title = this.getHash("title");
+    // that.init.data.user_id = this.getHash("id");
+    // that.init.data.openid = this.getHash("openid");
+    // that.init.data.wangge_id = this.getHash("toid");
+    // that.init.data.name = this.getHash("name");
+    // that.init.data.headimgurl = this.getHash("avatar");
+    // that.init.data.user_gn_type = this.getHash("user_gn_type");
+    // that.postmssage.data.to.id = this.getHash("toid");
+    // document.title = this.getHash("title");
 
     let INITDATA = JSON.stringify(this.init);
     //打开连接websocket
@@ -226,8 +240,17 @@ export default {
   },
   created() {
     this.screen = window.screen.availHeight;
+    let length = document.getElementsByClassName("swiper-slide").length;
+    var i = 1;
+    setInterval(() => {
+      i === 2 ? (i = 0) : (i = i + 1);
+      document.getElementsByClassName(
+        "swiper-content"
+      )[0].style.marginTop = `-${i * 30}px`;
+    }, 3000);
     // this.getChatHeight();
   },
+
   destroyed() {
     socket.close();
   }
@@ -250,6 +273,7 @@ export default {
 
 .chatArea {
   overflow-y: scroll;
+
   // padding-bottom: 81px;
   -div {
     padding: 15px;
@@ -270,12 +294,16 @@ textarea {
   width: 100%;
   // margin-top: 4px;
   border: none;
-  border-bottom: 1px solid green;
+  border-bottom: 1px solid #dddddd;
   overflow-y: scroll;
   z-index: 999;
   font-size: 16px;
   height: 20px;
   outline: none;
+
+  &:focus {
+    border-bottom: 1px solid green;
+  }
 }
 
 .textareaDiv {
@@ -288,19 +316,33 @@ textarea {
 .navArea .item-7 {
   text-align: center;
 }
+
 #header {
-  width: 100%;
   box-shadow: 1px 1px 30px #e0e0e0;
   height: 48px;
   background: rgba(255, 255, 255, 0.99);
   position: fixed;
   top: 0;
+
+  .change,
   .iconfont {
-    padding: 0 32px;
-    font-size: 24px;
     color: #aaaaaa;
   }
+
+  .change {
+    .iconfont {
+      font-size: 15px;
+    }
+
+    font-size: 14px;
+  }
+
+  .iconfont {
+    font-size: 24px;
+    text-align: right;
+  }
 }
+
 .getmore {
   margin-top: 30px;
   font-size: 12px;
@@ -308,12 +350,36 @@ textarea {
   line-height: 30px;
 }
 
-.icon-jia1 {
-  font-size: 26px;
+.icon-jia1,
+.icon-yuyin {
+  font-size: 28px;
   color: #999999;
 }
 
 .weui-btn_mini {
+  line-height: 2.6;
   margin-left: 6px;
+}
+
+.swiper-container {
+  height: 30px;
+  overflow: hidden;
+}
+
+.swiper-slide {
+  line-height: 30px;
+}
+
+.swiper-slide {
+  font-size: 12px;
+  color: #c00000;
+}
+
+.swiper-container {
+  width: 100%;
+  text-align: center;
+}
+.right {
+  text-align: right;
 }
 </style>

@@ -35,7 +35,6 @@ export default {
   justify-items: center;
   justify-content: flex-end;
   margin-top: 12px;
-  margin-right: 9px;
 }
 
 .myMsg {

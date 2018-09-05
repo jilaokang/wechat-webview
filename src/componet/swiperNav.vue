@@ -21,7 +21,7 @@
                   <div class="iconfont icon-zhaopian1"></div>
                   <div class="iconfontNav">拍摄</div>
                   <div>
-                  <input type="file" id="postcamera" class="inputgroup" accept="image/*" capture="camera" />
+                  <input type="file" id="postcamera" disabled="false" class="inputgroup" accept="image/*" capture="camera" />
                </div>
                 </div>
               </section>
@@ -32,7 +32,7 @@
                   <div class="iconfont icon-yuyin1"></div>
                   <div class="iconfontNav">语音输入</div>
                   <div>
-                     <input type="file" id="postaudio" class="inputgroup" accept="*" />
+                     <input type="file" @click="watting"  id="postaudio" disabled="false"  class="inputgroup" accept="*" />
                   </div>
                 </div>
               </section>
@@ -107,6 +107,9 @@ export default {
     this.getValue("#postaudio", "audio");
   },
   methods: {
+    watting() {
+      alert("开发哥哥正在连夜加班完成中...");
+    },
     getValue(dom, type) {
       console.log("ddd");
       let that = this;
