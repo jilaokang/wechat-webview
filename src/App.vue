@@ -117,6 +117,9 @@ export default {
   methods: {
     screenSwitch(value) {
       let SCREEN = this.screen;
+      if (value) {
+        this.footernav = false;
+      }
       if (!(typeof value == "undefined")) this.keyBordheight = value;
       // console.log(typeof value == "undefined");
 
@@ -202,14 +205,14 @@ export default {
   },
   mounted() {
     let that = this;
-    // that.init.data.user_id = this.getHash("id");
-    // that.init.data.openid = this.getHash("openid");
-    // that.init.data.wangge_id = this.getHash("toid");
-    // that.init.data.name = this.getHash("name");
-    // that.init.data.headimgurl = this.getHash("avatar");
-    // that.init.data.user_gn_type = this.getHash("user_gn_type");
-    // that.postmssage.data.to.id = this.getHash("toid");
-    // document.title = this.getHash("title");
+    that.init.data.user_id = this.getHash("id");
+    that.init.data.openid = this.getHash("openid");
+    that.init.data.wangge_id = this.getHash("toid");
+    that.init.data.name = this.getHash("name");
+    that.init.data.headimgurl = this.getHash("avatar");
+    that.init.data.user_gn_type = this.getHash("user_gn_type");
+    that.postmssage.data.to.id = this.getHash("toid");
+    document.title = this.getHash("title");
 
     let INITDATA = JSON.stringify(this.init);
     //打开连接websocket
@@ -300,7 +303,7 @@ textarea {
   font-size: 16px;
   height: 20px;
   outline: none;
-
+  resize: none;
   &:focus {
     border-bottom: 1px solid green;
   }
