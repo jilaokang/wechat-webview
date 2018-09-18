@@ -15,7 +15,7 @@
                 </div>
               </section>
             </div>
-            <div class="item-3">
+            <!-- <div class="item-3">
               <section>
                 <div class="iconBlock">
                   <div class="iconfont icon-zhaopian1"></div>
@@ -25,8 +25,8 @@
                </div>
                 </div>
               </section>
-            </div>
-            <div class="item-3">
+            </div> -->
+            <!-- <div class="item-3">
               <section>
                 <div class="iconBlock">
                   <div class="iconfont icon-yuyin1"></div>
@@ -36,8 +36,8 @@
                   </div>
                 </div>
               </section>
-            </div>
-            <div class="item-3">
+            </div>  -->
+            <!-- <div class="item-3">
               <section>
                 <div class="iconBlock">
                   <div class="iconfont icon-wenjian"></div>
@@ -47,7 +47,7 @@
                   </div>
                 </div>
               </section>
-            </div>
+            </div> -->
             <div class="item-3">
               <section>
                 <div class="iconBlock" @click="toPushThing">
@@ -56,15 +56,16 @@
                 </div>
               </section>
             </div>
-            <div class="item-3">
+            <div class="item-3"></div>
+            <!-- <div class="item-3">
               <section>
                 <div class="iconBlock" @click="toJonin">
                   <div class="iconfont icon-huabanfuben"></div>
                   <div class="iconfontNav">我要参与</div>
                 </div>
               </section>
-            </div>
-            <div class="item-3">
+            </div> -->
+            <!-- <div class="item-3">
               <section>
                 <div class="iconBlock">
                   <div class="iconfont icon-qiandao-kaoqindaqia"></div>
@@ -79,7 +80,8 @@
                   <div class="iconfontNav">扫黑除恶</div>
                 </div>
               </section>
-            </div>
+            </div> -->
+            <div class="item-3"></div>
           </div>
         </div>
       </section>
@@ -184,7 +186,7 @@ export default {
 <style lang="scss" scoped>
 .ChatSwiper {
   padding: 10px;
-  height: 230px;
+  height: 100px;
   padding-bottom: 10px;
   background: #f5f5f5;
 

@@ -1,14 +1,15 @@
 <template>
 <div>
-    <div class="timer">
-      <div>
+    <div v-if="value.chat_time" class="timer">
+    <span>
         {{value.chat_time}}
-      </div>
+      </span>
     </div>
   <div class="MSG">
     <div class="myMsg">
           <div class="icon-qipao-copy iconfont"></div>
-      <div class="myMsg__content" v-html="value.content"></div>
+      <span class="myMsg__content" v-html="value.content">
+      </span>
     </div>
     <div class="userInFo">
       <div class="userInFo__avator">
@@ -38,41 +39,44 @@ export default {
 }
 
 .myMsg {
+  text-align: right;
   width: 60vw;
+  margin: 8px 0;
+  // background: #ffffff;
+  padding: 1px;
   .myMsg__content {
-    padding: 9px 12px;
-    border-radius: 4px;
+    text-align: left;
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 1.1rem;
+    border-radius: 2px;
     word-break: break-word;
-    background: #a1e85a;
+    background: #95df4b;
     color: #000000;
-    img {
-      width: 50px !important;
-    }
   }
   .iconfont {
-    font-size: 30px;
+    font-size: 0px;
+    margin-top: -9px;
     z-index: 999;
-    float: right;
-    margin-right: -16px;
-    color: #a1e85a;
+    // float: right;
+    margin-right: -10px;
+    color: #95df4b;
   }
 }
 
 .userInFo {
-  width: 60px;
+  width: 55px;
   padding-right: 6px;
   .userInFo__avator {
     margin: 0 auto;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    overflow: hidden;
+    width: 32px;
+    height: 32px;
   }
   img {
     margin: 0 auto;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    border-radius: 2px;
   }
   .userInFo__content {
     margin-top: 6px;
@@ -83,15 +87,16 @@ export default {
 }
 .timer {
   text-align: center;
-  margin: 24px auto 16px auto;
-  width: 32%;
-  div {
-    background: #d5d5d5;
+  span {
+    padding: 3px 5px;
+    background: #d4d4d4;
     color: #ffffff;
     line-height: 2.2;
-    text-align: center;
-    border-radius: 8px;
+    border-radius: 2px;
     font-size: 10px;
   }
+}
+audio {
+  width: 100px;
 }
 </style>

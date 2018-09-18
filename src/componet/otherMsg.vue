@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="timer">
-      <div>
+    <div v-if="value.chat_time" class="timer">
+    <span>
         {{value.chat_time}}
-      </div>
+      </span>
     </div>
     <div class="MSG">
       <div class="userInFo">
@@ -14,7 +14,7 @@
       </div>
       <div class="otherMsg">
         <div class="icon-qipao iconfont"></div>
-        <div class="otherMsg__content" v-html="value.content"></div>
+        <span class="otherMsg__content" v-html="value.content"></span>
       </div>
     </div>
   </div>
@@ -37,38 +37,38 @@ export default {
 .MSG {
   display: flex;
   margin-top: 12px;
-  margin-left: 9px;
   justify-items: center;
 }
 
 .otherMsg {
   width: 60vw;
-
+  padding: 1px;
   .otherMsg__content {
-    padding: 9px 12px;
-    border-radius: 4px;
-    word-break: break-word;
-    background: #fff;
+    background: #ffffff;
+    padding: 8px 12px;
+    font-size: 1.1rem;
+    display: inline-block;
+    border-radius: 2px;
   }
 
   .iconfont {
-    font-size: 30px;
+    font-size: 0;
     float: left;
-    margin-top: 7px;
-    margin-left: -17px;
+    margin-top: -10px;
+    margin-left: -15px;
     color: white;
   }
 }
 
 .userInFo {
-  width: 75px;
+  width: 55px;
 
   .userInFo__avator,
   img {
     margin: 0 auto;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    border-radius: 2px;
   }
 
   .userInFo__content {
@@ -81,15 +81,16 @@ export default {
 
 .timer {
   text-align: center;
-  margin: 24px auto 16px auto;
-  width: 32%;
-  div {
-    background: #d5d5d5;
+  span {
+    padding: 3px 5px;
+    background: #d4d4d4;
     color: #ffffff;
     line-height: 2.2;
-    text-align: center;
-    border-radius: 8px;
+    border-radius: 2px;
     font-size: 10px;
   }
+}
+audio {
+  width: 100px;
 }
 </style>
